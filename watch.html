@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#2E86DE">
+<title>SafeKid — Kid Watch Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="watch.css">
+</head>
+<body>
+  <main class="stage">
+    <section class="demo-copy" aria-label="SafeKid Watch demo guide">
+      <p class="eyebrow">SafeKid Prototype</p>
+      <h1>Kid Watch Demo</h1>
+      <p class="lede">Mô phỏng giao diện đồng hồ của bé: ít chữ, nút lớn, vui nhưng vẫn ưu tiên an toàn.</p>
+
+      <div class="test-card">
+        <h2>Luồng test 2 phút</h2>
+        <ol>
+          <li>Xem trạng thái an toàn trên màn chính</li>
+          <li>Hoàn thành nhiệm vụ để nhận xu</li>
+          <li>Xem quà có thể đổi</li>
+          <li>Gọi mẹ từ danh bạ được duyệt</li>
+          <li>Kích hoạt SOS demo</li>
+        </ol>
+      </div>
+
+      <div class="notice">
+        <b>Nguyên tắc:</b> SOS kết nối tới phụ huynh/người thật. S.F AI không tự xử lý khẩn cấp.
+      </div>
+
+      <a class="parent-link" href="index.html">← Quay lại Parent App</a>
+    </section>
+
+    <section class="watch-shell" aria-label="SafeKid smartwatch">
+      <div class="strap strap-top"></div>
+      <div class="strap strap-bottom"></div>
+      <button class="side side-top" id="sideHome" aria-label="Home"></button>
+      <button class="side side-bottom" id="sideSOS" aria-label="SOS shortcut"></button>
+
+      <div class="watch-bezel">
+        <div class="watch-screen">
+          <div class="watch-status">
+            <span id="tinyTime">09:41</span>
+            <span class="status-icons"><i class="gps"></i>4G <b id="battery">78%</b></span>
+          </div>
+
+          <!-- FACE -->
+          <section class="w-screen is-on" data-screen="face">
+            <div class="face-cloud c1"></div>
+            <div class="face-cloud c2"></div>
+            <div class="zodiac" aria-hidden="true">🐱</div>
+            <p class="kid-label">SafeKid</p>
+            <h2 id="clock">09:41</h2>
+            <div class="safe-pill">📍 An toàn</div>
+            <div class="face-row">
+              <span>🪙 <b id="coinsFace">120</b></span>
+              <span>❤️ 92</span>
+            </div>
+            <button class="big-cta" data-go="menu">Mở menu</button>
+          </section>
+
+          <!-- MENU -->
+          <section class="w-screen" data-screen="menu">
+            <header class="mini-head">
+              <button class="mini-back" data-go="face">‹</button>
+              <h2>Menu</h2>
+              <span></span>
+            </header>
+            <div class="app-grid">
+              <button class="app-tile call" data-go="call"><span>📞</span><b>Gọi</b></button>
+              <button class="app-tile sos" data-go="sos"><span>🆘</span><b>SOS</b></button>
+              <button class="app-tile task" data-go="tasks"><span>✅</span><b>Nhiệm vụ</b></button>
+              <button class="app-tile gift" data-go="rewards"><span>🎁</span><b>Quà</b></button>
+              <button class="app-tile school" data-go="school"><span>🏫</span><b>Lớp học</b></button>
+              <button class="app-tile music" data-go="music"><span>🎵</span><b>Nhạc</b></button>
+            </div>
+          </section>
+
+          <!-- CALL -->
+          <section class="w-screen" data-screen="call">
+            <header class="mini-head">
+              <button class="mini-back" data-go="menu">‹</button>
+              <h2>Gọi người thân</h2>
+              <span></span>
+            </header>
+            <div class="contact-list">
+              <button class="contact" data-call="Mẹ Linh"><span>👩</span><b>Mẹ</b><small>Được duyệt</small></button>
+              <button class="contact" data-call="Bố Hùng"><span>👨</span><b>Bố</b><small>Được duyệt</small></button>
+              <button class="contact" data-call="Bà Mai"><span>👵</span><b>Bà</b><small>Được duyệt</small></button>
+            </div>
+            <p class="tiny-note">Chỉ gọi được danh bạ ba/mẹ cho phép.</p>
+          </section>
+
+          <!-- CALLING -->
+          <section class="w-screen call-live" data-screen="calling">
+            <div class="call-avatar" id="callAvatar">👩</div>
+            <p class="call-to">Đang gọi</p>
+            <h2 id="callName">Mẹ Linh</h2>
+            <p class="call-time" id="callTime">00:00</p>
+            <button class="end-call" id="endCall">Kết thúc</button>
+          </section>
+
+          <!-- SOS -->
+          <section class="w-screen" data-screen="sos">
+            <header class="mini-head danger-head">
+              <button class="mini-back" data-go="menu">‹</button>
+              <h2>SOS</h2>
+              <span></span>
+            </header>
+            <div class="sos-ready">
+              <div class="sos-icon">🆘</div>
+              <h2>Giữ 3 giây</h2>
+              <p>Gửi vị trí và gọi ba/mẹ ngay.</p>
+              <button class="hold-btn" id="holdSOS"><span id="holdRing"></span><b>Giữ SOS</b></button>
+              <button class="ghost" data-go="menu">Huỷ</button>
+            </div>
+          </section>
+
+          <!-- SOS ACTIVE -->
+          <section class="w-screen sos-live" data-screen="sosLive">
+            <div class="sos-wave"><span></span><span></span><b>🆘</b></div>
+            <h2 id="sosLiveTitle">Đang gọi Mẹ…</h2>
+            <p>Vị trí đã gửi cho phụ huynh</p>
+            <div class="sos-steps">
+              <span class="done">1 Gửi vị trí</span>
+              <span class="done">2 Gọi mẹ</span>
+              <span>3 Gọi bố nếu không bắt máy</span>
+            </div>
+            <button class="end-call" id="endSOS">Kết thúc</button>
+          </section>
+
+          <!-- TASKS -->
+          <section class="w-screen" data-screen="tasks">
+            <header class="mini-head">
+              <button class="mini-back" data-go="menu">‹</button>
+              <h2>Nhiệm vụ</h2>
+              <span class="coin-mini">🪙 <b id="coinsTask">120</b></span>
+            </header>
+            <div class="task-watch-list" id="watchTasks"></div>
+            <button class="big-cta small" id="resetDemo">Đặt lại demo</button>
+          </section>
+
+          <!-- TASK SUCCESS -->
+          <section class="w-screen reward-pop" data-screen="taskDone">
+            <div class="confetti">✨ 🎉 ✨</div>
+            <h2>Giỏi lắm!</h2>
+            <p id="taskRewardText">+10 xu</p>
+            <div class="big-coin">🪙</div>
+            <button class="big-cta" data-go="tasks">Tiếp tục</button>
+          </section>
+
+          <!-- REWARDS -->
+          <section class="w-screen" data-screen="rewards">
+            <header class="mini-head">
+              <button class="mini-back" data-go="menu">‹</button>
+              <h2>Quà thưởng</h2>
+              <span class="coin-mini">🪙 <b id="coinsReward">120</b></span>
+            </header>
+            <div class="reward-watch-list" id="watchRewards"></div>
+            <p class="tiny-note">Cần ba/mẹ duyệt trước khi đổi.</p>
+          </section>
+
+          <!-- SCHOOL -->
+          <section class="w-screen school-mode" data-screen="school">
+            <header class="mini-head">
+              <button class="mini-back" data-go="menu">‹</button>
+              <h2>Lớp học</h2>
+              <span></span>
+            </header>
+            <div class="school-badge">🏫</div>
+            <h2 id="schoolTitle">Chế độ lớp học</h2>
+            <p id="schoolText">Chỉ xem giờ. Cuộc gọi lạ bị chặn. SOS vẫn hoạt động.</p>
+            <label class="watch-switch">
+              <input id="schoolToggle" type="checkbox" checked>
+              <span></span>
+            </label>
+          </section>
+
+          <!-- MUSIC -->
+          <section class="w-screen music-mode" data-screen="music">
+            <header class="mini-head">
+              <button class="mini-back" data-go="menu">‹</button>
+              <h2>Nhạc offline</h2>
+              <span></span>
+            </header>
+            <div class="album">🎵</div>
+            <h2>Bài hát vui</h2>
+            <p>Chỉ phát nội dung phụ huynh chọn sẵn.</p>
+            <button class="big-cta" id="playMusic">Phát thử</button>
+          </section>
+        </div>
+      </div>
+
+      <div class="watch-toast" id="watchToast"></div>
+    </section>
+  </main>
+
+<script src="watch.js"></script>
+</body>
+</html>

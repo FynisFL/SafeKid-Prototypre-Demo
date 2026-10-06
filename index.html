@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#2E86DE">
+<title>SafeKid — Parent App (Prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="phone">
+  <div class="notch"></div>
+
+  <div class="statusbar">
+    <span class="sb-time">9:41</span>
+    <span class="sb-icons">
+      <span class="sb-signal"></span>
+      <span class="sb-wifi"></span>
+      <span class="sb-batt"></span>
+    </span>
+  </div>
+
+  <main id="app">
+
+    <!-- ═══════════ HOME ═══════════ -->
+    <section class="screen is-active" data-screen="home">
+      <header class="apphead">
+        <div>
+          <p class="apphead-hi">Chào buổi sáng 👋</p>
+          <h1 class="apphead-name">Mẹ Linh</h1>
+        </div>
+        <button class="avatar-btn" data-go="privacy" aria-label="Cài đặt & quyền riêng tư">
+          <span class="avatar">L</span>
+          <span class="avatar-dot"></span>
+        </button>
+      </header>
+
+      <div class="scroll">
+        <article class="childcard">
+          <div class="childcard-top">
+            <div class="kid">
+              <span class="kid-ava">👧</span>
+              <div>
+                <p class="kid-name">Bé An</p>
+                <p class="kid-meta">6 tuổi · Lớp 1</p>
+              </div>
+            </div>
+            <span class="pill pill-online"><i></i>Đang kết nối</span>
+          </div>
+
+          <div class="childcard-map" data-go="map">
+            <div class="minimap">
+              <span class="mm-road mm-h"></span>
+              <span class="mm-road mm-v"></span>
+              <span class="mm-park"></span>
+              <span class="mm-zone"></span>
+              <span class="mm-kid"></span>
+            </div>
+            <div class="childcard-loc">
+              <p class="loc-title">📍 Trường Tiểu học Hòa Bình</p>
+              <p class="loc-sub">Cập nhật 2 phút trước · trong vùng an toàn</p>
+            </div>
+          </div>
+
+          <div class="childcard-actions">
+            <button class="ca ca-sos" data-sos>
+              <span class="ca-ico">🆘</span>
+              <span class="ca-txt">SOS</span>
+            </button>
+            <button class="ca" data-call>
+              <span class="ca-ico">📞</span>
+              <span class="ca-txt">Gọi</span>
+            </button>
+            <button class="ca" data-go="zone">
+              <span class="ca-ico">🛡️</span>
+              <span class="ca-txt">Safe Zone</span>
+            </button>
+            <button class="ca" data-go="premium">
+              <span class="ca-ico">⭐</span>
+              <span class="ca-txt">Premium</span>
+            </button>
+          </div>
+        </article>
+
+        <div class="coins">
+          <div class="coins-l">
+            <span class="coins-ico">🪙</span>
+            <div>
+              <p class="coins-num"><span id="coinHome">120</span> xu</p>
+              <p class="coins-sub">Xu thưởng của Bé An</p>
+            </div>
+          </div>
+          <button class="coins-btn" data-go="reward">Đổi quà</button>
+        </div>
+
+        <section class="block">
+          <div class="block-head">
+            <h2>Nhiệm vụ hôm nay</h2>
+            <button class="link" data-go="habit">Xem tất cả</button>
+          </div>
+          <ul class="minitasks" id="homeTasks"></ul>
+        </section>
+
+        <section class="block">
+          <div class="block-head"><h2>Gợi ý cho gia đình</h2></div>
+          <div class="tips">
+            <button class="tip" data-go="ai">
+              <span class="tip-ico">🤖</span>
+              <div>
+                <p class="tip-t">Hỏi S.F AI</p>
+                <p class="tip-s">Tư vấn sản phẩm & hướng dẫn dùng</p>
+              </div>
+            </button>
+            <button class="tip" data-go="privacy">
+              <span class="tip-ico">🔒</span>
+              <div>
+                <p class="tip-t">Dữ liệu của bé</p>
+                <p class="tip-s">Xem quyền riêng tư & mã hoá</p>
+              </div>
+            </button>
+          </div>
+        </section>
+        <div class="spacer"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════ MAP ═══════════ -->
+    <section class="screen" data-screen="map">
+      <header class="apphead apphead-row">
+        <button class="back" data-go="home">‹</button>
+        <h1 class="apphead-title">Vị trí của bé</h1>
+        <span class="pill pill-online"><i></i>Live</span>
+      </header>
+
+      <div class="mapwrap">
+        <div class="bigmap">
+          <span class="bm-block b1"></span>
+          <span class="bm-block b2"></span>
+          <span class="bm-block b3"></span>
+          <span class="bm-block b4"></span>
+          <span class="bm-park">🌳</span>
+          <span class="bm-road bm-h1"></span>
+          <span class="bm-road bm-h2"></span>
+          <span class="bm-road bm-v1"></span>
+          <span class="bm-road bm-v2"></span>
+          <span class="bm-zone" id="bmZone"></span>
+          <span class="bm-home">🏠</span>
+          <span class="bm-kid" id="bmKid">
+            <span class="ring"></span><span class="ring r2"></span>
+            <span class="dot"></span>
+          </span>
+        </div>
+
+        <div class="mapsheet">
+          <div class="sheet-grab"></div>
+          <div class="sheet-kid">
+            <span class="kid-ava sm">👧</span>
+            <div>
+              <p class="kid-name">Bé An</p>
+              <p class="loc-sub" id="mapUpdated">Cập nhật 2 phút trước · pin 78%</p>
+            </div>
+          </div>
+          <div class="sheet-stats">
+            <div class="stat"><p class="stat-v" id="distHome">420 m</p><p class="stat-l">cách nhà</p></div>
+            <div class="stat"><p class="stat-v">Trong vùng</p><p class="stat-l">trạng thái</p></div>
+            <div class="stat"><p class="stat-v">3</p><p class="stat-l">điểm đến hôm nay</p></div>
+          </div>
+          <div class="sheet-actions">
+            <button class="btn btn-ghost" id="histBtn">🕘 Lịch sử 30 ngày</button>
+            <button class="btn btn-primary" data-go="zone">🛡️ Vùng an toàn</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SAFE ZONE ═══════════ -->
+    <section class="screen" data-screen="zone">
+      <header class="apphead apphead-row">
+        <button class="back" data-go="home">‹</button>
+        <h1 class="apphead-title">Vùng an toàn</h1>
+        <span style="width:34px"></span>
+      </header>
+
+      <div class="scroll">
+        <div class="zonepreview">
+          <div class="bigmap small">
+            <span class="bm-road bm-h1"></span>
+            <span class="bm-road bm-v1"></span>
+            <span class="bm-zone live" id="zoneLive"></span>
+            <span class="bm-home">🏠</span>
+            <span class="bm-kid" style="left:58%;top:44%"><span class="dot"></span></span>
+          </div>
+          <div class="zone-slider">
+            <div class="zs-head"><span>Bán kính vùng</span><b id="zoneRadiusTxt">300 m</b></div>
+            <input type="range" id="zoneRadius" min="100" max="1000" step="50" value="300">
+          </div>
+        </div>
+
+        <section class="block">
+          <div class="block-head"><h2>Vùng đã thiết lập</h2></div>
+          <ul class="zonelist">
+            <li class="zoneitem">
+              <span class="zi-ico zi-home">🏠</span>
+              <div class="zi-body">
+                <p class="zi-t">Nhà riêng</p>
+                <p class="zi-s">Bán kính 300 m · cảnh báo khi ra khỏi</p>
+              </div>
+              <label class="switch"><input type="checkbox" checked><span></span></label>
+            </li>
+            <li class="zoneitem">
+              <span class="zi-ico zi-school">🏫</span>
+              <div class="zi-body">
+                <p class="zi-t">Trường Tiểu học Hòa Bình</p>
+                <p class="zi-s">Bán kính 500 m · 7:00 – 16:30</p>
+              </div>
+              <label class="switch"><input type="checkbox" checked><span></span></label>
+            </li>
+            <li class="zoneitem">
+              <span class="zi-ico zi-gym">⚽</span>
+              <div class="zi-body">
+                <p class="zi-t">Nhà văn hoá thiếu nhi</p>
+                <p class="zi-s">Bán kính 200 m · cuối tuần</p>
+              </div>
+              <label class="switch"><input type="checkbox"><span></span></label>
+            </li>
+          </ul>
+          <button class="btn btn-dashed" id="addZone">＋ Thêm vùng an toàn</button>
+        </section>
+
+        <section class="block">
+          <div class="block-head"><h2>Thông báo</h2></div>
+          <div class="notecard">
+            <p>Khi bé ra khỏi vùng an toàn, app gửi <b>thông báo đẩy</b> tới phụ huynh trong danh sách được duyệt. Đây là <b>cảnh báo</b>, không thay thế quy trình liên hệ khẩn cấp.</p>
+          </div>
+        </section>
+        <div class="spacer"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════ HABIT ═══════════ -->
+    <section class="screen" data-screen="habit">
+      <header class="apphead">
+        <div>
+          <p class="apphead-hi">Rèn thói quen 🎯</p>
+          <h1 class="apphead-name">Nhiệm vụ của Bé An</h1>
+        </div>
+        <div class="coinbadge">🪙 <span id="coinHabit">120</span></div>
+      </header>
+
+      <div class="scroll">
+        <div class="habitbar">
+          <div class="hb-txt">
+            <p class="hb-t">Hoàn thành <span id="doneCount">2</span>/<span id="totalCount">5</span> nhiệm vụ</p>
+            <p class="hb-s">Mỗi nhiệm vụ xong = xu thưởng cho bé</p>
+          </div>
+          <div class="hb-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" class="rbg"/><circle cx="20" cy="20" r="16" class="rfg" id="hbRing"/></svg></div>
+        </div>
+
+        <section class="block">
+          <div class="block-head"><h2>Hôm nay</h2><button class="link" id="resetTasks">Đặt lại</button></div>
+          <ul class="tasklist" id="taskList"></ul>
+          <button class="btn btn-dashed" id="addTask">＋ Thêm nhiệm vụ</button>
+        </section>
+
+        <section class="block">
+          <div class="block-head"><h2>Streak</h2></div>
+          <div class="streak">
+            <span class="sd on">T2</span><span class="sd on">T3</span><span class="sd on">T4</span>
+            <span class="sd on">T5</span><span class="sd">T6</span><span class="sd">T7</span><span class="sd">CN</span>
+          </div>
+          <p class="streak-note">🔥 Chuỗi 4 ngày liên tiếp — duy trì để nhận thêm 20 xu!</p>
+        </section>
+        <div class="spacer"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════ REWARD ═══════════ -->
+    <section class="screen" data-screen="reward">
+      <header class="apphead">
+        <div>
+          <p class="apphead-hi">Cửa hàng phần thưởng 🎁</p>
+          <h1 class="apphead-name">Đổi xu nhận quà</h1>
+        </div>
+      </header>
+
+      <div class="scroll">
+        <div class="wallet">
+          <p class="wallet-l">Số dư xu của Bé An</p>
+          <p class="wallet-n">🪙 <span id="coinReward">120</span></p>
+          <p class="wallet-s">Phụ huynh xác nhận & trao quà thật ngoài đời</p>
+        </div>
+
+        <section class="block">
+          <div class="block-head"><h2>Quà có thể đổi</h2></div>
+          <ul class="rewardlist" id="rewardList"></ul>
+        </section>
+
+        <div class="notecard warn">
+          <p>🔒 <b>Phụ huynh kiểm soát:</b> bé không thể tự đổi quà. Mỗi lần đổi cần phụ huynh phê duyệt trong app — an toàn cho cả gia đình.</p>
+        </div>
+        <div class="spacer"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PREMIUM ═══════════ -->
+    <section class="screen" data-screen="premium">
+      <header class="apphead apphead-row">
+        <button class="back" data-go="home">‹</button>
+        <h1 class="apphead-title">Gói Premium</h1>
+        <span style="width:34px"></span>
+      </header>
+
+      <div class="scroll">
+        <div class="premhero">
+          <p class="premhero-k">⭐ SafeKid Premium</p>
+          <p class="premhero-t">An tâm hơn mỗi ngày</p>
+          <p class="premhero-s">Mở khoá toàn bộ tính năng an toàn & thói quen cho gia đình</p>
+        </div>
+
+        <div class="segmented" id="cycleSeg">
+          <button class="seg is-on" data-cycle="week">Tuần</button>
+          <button class="seg" data-cycle="month">Tháng</button>
+          <button class="seg" data-cycle="year">Năm</button>
+        </div>
+
+        <div class="pricecard">
+          <p class="price-num" id="priceNum">19.000đ</p>
+          <p class="price-unit" id="priceUnit">/ tuần · huỷ bất cứ lúc nào</p>
+          <p class="price-save" id="priceSave"></p>
+        </div>
+
+        <section class="block">
+          <div class="block-head"><h2>Free vs Premium</h2></div>
+          <div class="cmp">
+            <div class="cmp-row cmp-head"><span>Tính năng</span><span>Free</span><span>Premium</span></div>
+            <div class="cmp-row"><span>GPS kiểm tra thủ công</span><span class="yes">✓</span><span class="yes">✓</span></div>
+            <div class="cmp-row"><span>Gọi 2 chiều</span><span class="yes">✓</span><span class="yes">✓</span></div>
+            <div class="cmp-row"><span>GPS thời gian thực + lịch sử 30 ngày</span><span class="no">–</span><span class="yes">✓</span></div>
+            <div class="cmp-row"><span>Vùng an toàn thông minh</span><span class="no">–</span><span class="yes">✓</span></div>
+            <div class="cmp-row"><span>Gesture SOS (chạm 3 lần)</span><span class="no">–</span><span class="yes">✓</span></div>
+            <div class="cmp-row"><span>Nhiệm vụ & đổi xu không giới hạn</span><span class="no">–</span><span class="yes">✓</span></div>
+            <div class="cmp-row"><span>Cảnh báo tháo thiết bị</span><span class="no">–</span><span class="yes">✓</span></div>
+            <div class="cmp-row"><span>Chế độ lớp học nghiêm ngặt</span><span class="no">–</span><span class="yes">✓</span></div>
+            <div class="cmp-row"><span>Phân tích giấc ngủ</span><span class="no">–</span><span class="yes">✓</span></div>
+          </div>
+        </section>
+
+        <div class="notecard">
+          <p>🆘 <b>Lưu ý an toàn:</b> tính năng SOS luôn hoạt động ở cả gói Free. AI <b>không</b> tự xử lý tình huống khẩn cấp — cuộc gọi luôn tới người thật (phụ huynh / tổng đài 113).</p>
+        </div>
+
+        <button class="btn btn-premium" id="subBtn">Dùng thử 7 ngày miễn phí</button>
+        <p class="fineprint">Sau đó 19.000đ/tuần. Huỷ bất cứ lúc nào trong phần cài đặt.</p>
+        <div class="spacer"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════ S.F AI ═══════════ -->
+    <section class="screen screen-flat" data-screen="ai">
+      <header class="apphead apphead-row aihead">
+        <button class="back" data-go="home">‹</button>
+        <div class="aihead-mid">
+          <p class="aihead-t">S.F AI</p>
+          <p class="aihead-s"><i class="live"></i>Trợ lý hỗ trợ · Tier-1</p>
+        </div>
+        <button class="aihead-human" id="humanTop">👤</button>
+      </header>
+
+      <div class="chat" id="chat">
+        <div class="msg ai">
+          <span class="msg-ava">🤖</span>
+          <div class="bubble">Xin chào Mẹ Linh 👋 Mình là <b>S.F AI</b>, trợ lý hỗ trợ của SafeKid. Mình có thể giúp về sản phẩm, cách dùng app, hoặc bảo hành. Mẹ cần hỏi gì ạ?</div>
+        </div>
+        <div class="msg ai">
+          <span class="msg-ava">🤖</span>
+          <div class="bubble">Lưu ý: với tình huống khẩn cấp, mẹ hãy bấm nút <b>SOS</b> trên app hoặc gọi <b>113</b> — mình không xử lý được cuộc gọi khẩn cấp ạ.</div>
+        </div>
+      </div>
+
+      <div class="chips" id="chips">
+        <button class="chip">Pin dùng được bao lâu?</button>
+        <button class="chip">Cách thiết lập vùng an toàn?</button>
+        <button class="chip">Gói Premium có gì?</button>
+        <button class="chip">Bảo hành thế nào?</button>
+      </div>
+
+      <form class="chatbar" id="chatForm">
+        <button type="button" class="chatbar-human" id="humanBtn" title="Gặp nhân viên">👤</button>
+        <input type="text" id="chatInput" placeholder="Nhập câu hỏi cho S.F AI..." autocomplete="off">
+        <button type="submit" class="chatbar-send">➤</button>
+      </form>
+    </section>
+
+    <!-- ═══════════ PRIVACY ═══════════ -->
+    <section class="screen" data-screen="privacy">
+      <header class="apphead apphead-row">
+        <button class="back" data-go="home">‹</button>
+        <h1 class="apphead-title">Quyền riêng tư & dữ liệu</h1>
+        <span style="width:34px"></span>
+      </header>
+
+      <div class="scroll">
+        <div class="profilecard">
+          <span class="avatar big">L</span>
+          <div>
+            <p class="pc-n">Mẹ Linh</p>
+            <p class="pc-s">Tài khoản phụ huynh chính</p>
+          </div>
+        </div>
+
+        <section class="block">
+          <div class="block-head"><h2>Quyền truy cập dữ liệu</h2></div>
+          <ul class="perm">
+            <li class="zoneitem">
+              <span class="zi-ico zi-loc">📍</span>
+              <div class="zi-body"><p class="zi-t">Vị trí của bé</p><p class="zi-s">Chỉ phụ huynh được duyệt mới xem được</p></div>
+              <label class="switch"><input type="checkbox" checked><span></span></label>
+            </li>
+            <li class="zoneitem">
+              <span class="zi-ico zi-bell">🔔</span>
+              <div class="zi-body"><p class="zi-t">Thông báo cảnh báo</p><p class="zi-s">Vùng an toàn, SOS, tháo thiết bị</p></div>
+              <label class="switch"><input type="checkbox" checked><span></span></label>
+            </li>
+            <li class="zoneitem">
+              <span class="zi-ico zi-mic">🎤</span>
+              <div class="zi-body"><p class="zi-t">Ghi âm khi SOS</p><p class="zi-s">Chỉ bật khi bé kích hoạt SOS</p></div>
+              <label class="switch"><input type="checkbox"><span></span></label>
+            </li>
+          </ul>
+        </section>
+
+        <section class="block">
+          <div class="block-head"><h2>Bảo mật dữ liệu trẻ em</h2></div>
+          <div class="secgrid">
+            <div class="seccard"><span>🔐</span><p class="sec-t">Mã hoá SSL/TLS</p><p class="sec-s">Toàn bộ dữ liệu truyền đi được mã hoá</p></div>
+            <div class="seccard"><span>🗄️</span><p class="sec-t">Lưu trữ tối thiểu</p><p class="sec-s">Chỉ lưu dữ liệu cần thiết cho an toàn</p></div>
+            <div class="seccard"><span>👨‍👩‍👧</span><p class="sec-t">Chỉ phụ huynh duyệt</p><p class="sec-s">Danh sách người xem do phụ huynh quyết</p></div>
+            <div class="seccard"><span>🗑️</span><p class="sec-t">Xoá khi yêu cầu</p><p class="sec-s">Phụ huynh có quyền xoá dữ liệu của bé</p></div>
+          </div>
+        </section>
+
+        <button class="btn btn-ghost wide" id="delData">Yêu cầu xoá dữ liệu của bé</button>
+        <div class="spacer"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ SOS OVERLAY ═══════════ -->
+  <div class="sos-overlay" id="sosOverlay">
+    <div class="sos-inner">
+      <div class="sos-pulse"><span></span><span></span><span></span><b>🆘</b></div>
+      <h2 class="sos-h" id="sosTitle">Đang gọi Bố / Mẹ…</h2>
+      <p class="sos-sub" id="sosSub">Bé An vừa kích hoạt SOS · Gesture chạm 3 lần</p>
+
+      <div class="sos-contacts">
+        <div class="sosc on"><span>👩</span><p>Mẹ Linh</p><small id="callTimer">00:00</small></div>
+        <div class="sosc"><span>👨</span><p>Bố Hùng</p><small>Chờ</small></div>
+        <div class="sosc"><span>☎️</span><p>Tổng đài 113</p><small>Sẵn sàng</small></div>
+      </div>
+
+      <div class="sos-note">
+        ⚠️ Đây là <b>quy trình con người</b>. AI không tự xử lý khẩn cấp — cuộc gọi được kết nối tới người thật ngay lập tức.
+      </div>
+
+      <div class="sos-actions">
+        <button class="btn btn-danger wide" id="sosEnd">Kết thúc cuộc gọi</button>
+        <button class="btn btn-ghost wide" id="sosLocate">📍 Xem vị trí bé ngay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ BOTTOM NAV ═══════════ -->
+  <nav class="tabbar" id="tabbar">
+    <button class="tab is-on" data-go="home"><span>🏠</span><small>Trang chủ</small></button>
+    <button class="tab" data-go="map"><span>🗺️</span><small>Bản đồ</small></button>
+    <button class="tab" data-go="habit"><span>✅</span><small>Nhiệm vụ</small></button>
+    <button class="tab" data-go="reward"><span>🎁</span><small>Đổi quà</small></button>
+    <button class="tab" data-go="ai"><span>🤖</span><small>S.F AI</small></button>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
